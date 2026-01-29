@@ -1,77 +1,52 @@
 import {AnimeList} from '../components/AnimeList';
+import {Header} from '../components/Header';
 import {useState, useEffect} from 'react';
 import {buscarTodosAnimes} from '../services/animeService'
 
 export const Home = () =>{
+    
     const [lista, setLista]   = useState([]);
     const [loading, setLoading] = useState(true);  
-      
-    const [novoNome, setNovoNome] = useState('');
-    const [novoPersonagem, setNovoPersonagem] = useState('');
-    const [novoPoder, setNovoPoder] = useState('');
+    const [error, setError] = useState(null);
+   
+    
 
 useEffect(() =>{
     async function carregarAnimes() {
+        try{
         const dados = await buscarTodosAnimes();
+        console.log('Dados recebidos',dados)
         setLista(dados)
         setLoading(false);
+        setError(null);
+        }catch(err){
+            console.log('Erro:', err);
+            setError('Erro ao carregar anime. Tente novamente');
+        }finally{
+            setLoading(false);
+        }
+        
     }
 
     carregarAnimes();
 }, []);
+
+ if (loading) return <p>Carregando..</p>;
+
+ if(error){
+    return(
+        <p className='text-red-600 text-3xl'>{error}</p>
+    )
+ }
     
     
-    const adicionarAnime = () =>{
-        const novo = {
-            mal_id: Date.now(),
-            nome: novoNome,
-            personagem: novoPersonagem,
-            poder: novoPoder
-        }
-    setLista([...lista, novo]);
-
-    setNovoNome('');
-    setNovoPersonagem('');
-    setNovoPoder('');
-
-    if (loading) return <p>Carregando..</p>;
-}
 
     return(
-        <div className='bg-zinc-950 h-screen flex'>
+        <div className=' min-h-screen bg-zinc-950  '>
+        <div className= ' mx-auto max-w-[1700px] px-6 bg-zinc-950  pt-20 '>
             <AnimeList animes = {lista}/>
-            <div>
-
-                <h2>Adicionar novo Anime</h2>
-                
-                <input 
-                type="text" 
-                placeholder='Titulo do Anime'
-                value={novoNome}
-                onChange={(e) => setNovoNome(e.target.value)}
-                />
-
-                <input 
-                type="text"
-                placeholder='Personagem'
-                value={novoPersonagem}
-                onChange={(e) => setNovoPersonagem(e.target.value)} 
-                />
-
-                <input 
-                type="text"
-                placeholder='Poder'
-                value={novoPoder}
-                onChange={(e) => setNovoPoder(e.target.value)} 
-                />
-
-                <button onClick={adicionarAnime} className='bg-green-950 p-1' >
-                    Adicionar
-                </button>
-                
-                
-                
-            </div>
+            <Header/>
+        </div>
         </div>
     )
         
