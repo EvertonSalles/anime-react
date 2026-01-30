@@ -1,11 +1,12 @@
-import {AnimeList} from '../components/AnimeList';
-import {Header} from '../components/Header';
 import {useState, useEffect} from 'react';
-import {buscarTodosAnimes} from '../services/animeService'
+import {Header} from '../components/Header';
+import {AnimeList} from '../components/AnimeList';
+import {buscarTodosAnimes} from '../services/animeService';
+import {AnimeDetails} from '../components/AnimeDetails';
 
 export const Home = () =>{
-    
     const [lista, setLista]   = useState([]);
+    const [animeSelecionado, setAnimeSelecionado] = useState(null);
     const [loading, setLoading] = useState(true);  
     const [error, setError] = useState(null);
    
@@ -17,6 +18,7 @@ useEffect(() =>{
         const dados = await buscarTodosAnimes();
         console.log('Dados recebidos',dados)
         setLista(dados)
+        {console.log(dados[0])}
         setLoading(false);
         setError(null);
         }catch(err){
@@ -27,6 +29,8 @@ useEffect(() =>{
         }
         
     }
+
+    
 
     carregarAnimes();
 }, []);
@@ -43,10 +47,23 @@ useEffect(() =>{
 
     return(
         <div className=' min-h-screen bg-zinc-950  '>
-        <div className= ' mx-auto max-w-[1700px] px-6 bg-zinc-950  pt-20 '>
-            <AnimeList animes = {lista}/>
-            <Header/>
-        </div>
+                <Header/>
+         <div className= ' mx-auto max-w-425 px-6 bg-zinc-950  pt-20 '>
+            <AnimeList animes = {lista}
+            onSelectAnime={setAnimeSelecionado}
+            />
+    </div>
+            {animeSelecionado && (
+                <AnimeDetails 
+                anime={animeSelecionado}
+                onClose={() => setAnimeSelecionado(null)}
+                />
+            )}
+            
+
+        
+            
+        
         </div>
     )
         

@@ -1,8 +1,8 @@
 export const  Header = () => {
     return(
-            <header className=" fixed top-0 left-0 w-full bg-zinc-700">
+            <header className=" fixed top-0 left-0 w-full z-50 bg-zinc-700">
                 <div className="   px-6 h-16 flex items-center   justify-around ">
-                    <h1 className="text-xl font-bold text-white ">Site animes</h1>
+                    <h1 className="text-xl font-bold text-white ">Animes React</h1>
 
                     <ul className="hidden md:flex  gap-10  text-white ">
                         <li> <a href="#">Destaques</a> </li>

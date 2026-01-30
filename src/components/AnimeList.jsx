@@ -1,6 +1,6 @@
 import {AnimeCard} from './AnimeCard';
 
- export const AnimeList = ({animes}) =>{
+ export const AnimeList = ({animes, onSelectAnime}) =>{
   
  if(!animes || animes.length === 0){
     return(
@@ -19,9 +19,16 @@ import {AnimeCard} from './AnimeCard';
         sm:grid-cols-2
         lg:grid-cols-3
         gap-y-10 
+        gap-x-10
+        md:gap-y-10 
+
                  bg-zinc-900 '>
           {animes.map(anime =>  
-          <AnimeCard key={anime.mal_id} {...anime}/>)}
+          <AnimeCard 
+          key={anime.mal_id} 
+          {...anime}
+          onClick={() => onSelectAnime(anime)}
+          />)}
          </div>
            )
            };
