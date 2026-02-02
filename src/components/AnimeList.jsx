@@ -28,7 +28,9 @@ import {AnimeCard} from './AnimeCard';
           key={anime.mal_id} 
           {...anime}
           onClick={() => onSelectAnime(anime)}
+
           />)}
+
          </div>
            )
            };
