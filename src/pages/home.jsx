@@ -23,7 +23,7 @@ export const Home = () => {
         async function carregarAnimes() {
             try {
                 setLoading(true);
-                
+                console.log('teste vercel')
                 const dados = await buscarTodosAnimes();
                 console.log('✅ Primeiros animes carregados:', dados.length);
                 setLista(dados);
