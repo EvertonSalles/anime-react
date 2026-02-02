@@ -1,5 +1,6 @@
 import {useState, useEffect} from 'react';
 import {Header} from '../components/Header';
+
 import {AnimeList} from '../components/AnimeList';
 import {buscarTodosAnimes, obterAnimesAtualizados} from '../services/animeService';
 import {AnimeDetails} from '../components/AnimeDetails';
