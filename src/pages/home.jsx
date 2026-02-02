@@ -188,4 +188,3 @@ export const Home = () => {
         </div>
     );
 };
-//Teste de git
