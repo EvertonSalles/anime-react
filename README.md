@@ -7,7 +7,7 @@ Projeto criado com foco em:
 - componentização
 - consumo de API
 - UI com TailwindCSS
-- deploy profissional com Vercel
+- deploy com Vercel
 
 ---
 
